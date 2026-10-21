@@ -1,0 +1,6 @@
+pyTelegramBotAPI
+requests
+urllib3
+beautifulsoup4
+pytz
+python-dotenv
