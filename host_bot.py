@@ -3,6 +3,21 @@ import time
 import json
 import subprocess
 import telebot
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import threading
+
+class SimpleHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Bot is alive and running!")
+
+def run_server():
+    port = int(os.environ.get("PORT", 8080))
+    server = HTTPServer(('0.0.0.0', port), SimpleHandler)
+    server.serve_forever()
+
+threading.Thread(target=run_server, daemon=True).start()
 
 # ================= কনফিগারেশন =================
 BOT_TOKEN = "8706468056:AAGOK5S0RE4npvHoHfz75hqVDBX9iT_hAm0"
